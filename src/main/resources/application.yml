@@ -1,0 +1,29 @@
+owner-name: srivatsan
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api/v1/management
+
+spring:
+  application:
+    name: school
+  datasource:
+    #    jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/postgres
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+
+  sql:
+    init:
+      mode: always
+
+  jpa:
+    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+
+admin:
+  name: srivatsan
+  password: password
