@@ -2,18 +2,16 @@ package com.management.school.database.dao.impl;
 
 import com.management.school.database.dao.StudentDao;
 import com.management.school.database.dao.rowmapper.StudentRowMapper;
+import com.management.school.model.Address;
 import com.management.school.model.Student;
 import jakarta.transaction.Transactional;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.json.JSONObject;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
-import static com.management.school.constant.QueryConstants.*;
-
-@Repository
+import static com.management.school.constant.QueryConstants.INSERT_STUDENT;
+import static com.management.school.constant.QueryConstants.SELECT_STUDENT;
 
 public class StudentDaoImpl implements StudentDao {
     private JdbcTemplate jdbcTemplate;
@@ -26,8 +24,15 @@ public class StudentDaoImpl implements StudentDao {
     public Student save(Student student) {
         jdbcTemplate.update(INSERT_STUDENT,
                 student.getName(), student.getAge(), student.getDegree(),
-                student.getBranch(), student.getAddress().toString());
+                student.getBranch(), convertAddressToJson(student.getAddress()));
         return student;
+    }
+
+    private String convertAddressToJson(Address address) {
+        JSONObject addressJson = new JSONObject();
+        addressJson.put("city", address.getCity());
+        addressJson.put("state", address.getState());
+        return addressJson.toString();
     }
 
     @Override
@@ -36,10 +41,11 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public Optional<List<Student>> findAll() {
+    public List<Student> findAll() {
         List<Student> studentList = jdbcTemplate.query(SELECT_STUDENT,
                 new StudentRowMapper());
-        return Optional.ofNullable(studentList);
+        System.out.println(studentList);
+        return studentList;
     }
 
     @Override

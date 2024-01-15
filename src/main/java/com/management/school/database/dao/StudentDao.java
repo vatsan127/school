@@ -13,7 +13,7 @@ public interface StudentDao {
 
     Student findById(Long id);
 
-    Optional<List<Student>> findAll();
+    List<Student> findAll();
 
     void deleteById(Long id);
 

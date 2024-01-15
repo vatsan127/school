@@ -25,5 +25,5 @@ spring:
 #      ddl-auto: update
 
 admin:
-  name: srivatsan
+  username: srivatsan
   password: password

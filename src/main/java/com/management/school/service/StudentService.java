@@ -1,14 +1,11 @@
 package com.management.school.service;
 
 import com.management.school.database.dao.StudentDao;
-import com.management.school.exception.StudentNotFoundException;
 import com.management.school.model.Student;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
+
 public class StudentService {
     private StudentDao studentDao;
 
@@ -21,11 +18,9 @@ public class StudentService {
     }
 
     public List<Student> getAllStudents() {
-        Optional<List<Student>> optionalStudentList = studentDao.findAll();
-        if(optionalStudentList.isPresent()) {
-            return optionalStudentList.get();
-        }
-        throw new StudentNotFoundException();
+        List<Student> studentList = studentDao.findAll();
+        return studentList;
     }
+
 
 }
