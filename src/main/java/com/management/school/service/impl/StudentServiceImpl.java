@@ -38,8 +38,13 @@ public class StudentServiceImpl implements StudentService {
 
 
     public Student removeStudent(Long id) {
-        Student student = getStudentsById(id);
-        studentDao.deleteById(id);
-        return student;
+        Optional<Student> optionalStudent = studentDao.findById(id);
+        if (optionalStudent.isPresent()){
+            studentDao.deleteById(id);
+        }
+        else {
+            throw new StudentNotFoundException();
+        }
+        return optionalStudent.get();
     }
 }

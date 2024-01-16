@@ -41,12 +41,13 @@ public class StudentDaoImpl implements StudentDao {
 
     @Override
     public Optional<Student> findById(Long id) {
+        Student student;
         try {
-            Student student = jdbcTemplate.queryForObject(SELECT_STUDENT_BY_ID, new StudentRowMapper(), id);
-            return Optional.of(student);
+            student = jdbcTemplate.queryForObject(SELECT_STUDENT_BY_ID, new StudentRowMapper(), id);
         } catch (IncorrectResultSizeDataAccessException e) {
-            throw new StudentNotFoundException();
+            student = null;
         }
+        return Optional.ofNullable(student);
     }
 
     @Override
