@@ -1,26 +1,15 @@
 package com.management.school.service;
 
-import com.management.school.database.dao.StudentDao;
 import com.management.school.model.Student;
 
 import java.util.List;
 
+public interface StudentService {
+    Student addstudent(Student student);
 
-public class StudentService {
-    private StudentDao studentDao;
+    Student getStudentsById(Long id);
 
-    public StudentService(StudentDao studentDao) {
-        this.studentDao = studentDao;
-    }
+    List<Student> getStudents();
 
-    public Student saveStudent(Student student) {
-        return studentDao.save(student);
-    }
-
-    public List<Student> getAllStudents() {
-        List<Student> studentList = studentDao.findAll();
-        return studentList;
-    }
-
-
+    Student removeStudent(Long id);
 }

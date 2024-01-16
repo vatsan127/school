@@ -3,6 +3,7 @@ package com.management.school.config;
 import com.management.school.database.dao.StudentDao;
 import com.management.school.database.dao.impl.StudentDaoImpl;
 import com.management.school.service.StudentService;
+import com.management.school.service.impl.StudentServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -24,6 +25,6 @@ public class StudentConfig {
 
     @Bean
     public StudentService studentService(StudentDao studentDao) {
-        return new StudentService(studentDao);
+        return new StudentServiceImpl(studentDao);
     }
 }
