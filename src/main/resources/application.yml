@@ -24,6 +24,10 @@ spring:
 #    hibernate:
 #      ddl-auto: update
 
+#springdoc:
+#  api-docs:
+#    path: /api/docs
+
 admin:
   username: srivatsan
   password: password
